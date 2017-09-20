@@ -1,13 +1,15 @@
-var express = require('express');
+var express = require('express')
+var app = express()
+var fs = express("fs");
 
-var app = express();
+app.set('port', (process.env.PORT || 5002))
+app.use(express.static(__dirname + '/public'))
 
-app.get('/', function (req, res) {
-    res.send('Hello World');
-});
+app.get('/', function(request, response) {
+ console.log(fs);
+response.sendfile('./index.html');
+})
 
-/* istanbul ignore next */
-if (!module.parent) {
-    app.listen(3000);
-    console.log('Express started on port 3001');
-}
+app.listen(app.get('port'), function() {
+  console.log("Node app is running at localhost:" + app.get('port'))
+})
