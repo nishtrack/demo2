@@ -6,11 +6,11 @@ app.set('port', (process.env.PORT || 5002))
 app.use(express.static(__dirname + '/public'))
 
 app.get('/', function(request, response) {
-response.sendfile('./index.html');
+response.sendfile('./login.html');
 })
 
 app.get('/login', function(request, response) {
-response.sendfile('./login.html');
+response.sendfile('./index.html');
 })
 
 
