@@ -39,7 +39,7 @@
 
 	<!-- Start Visual Website Optimizer Asynchronous Code -->
 	<script type='text/javascript'>
-		var _vwo_code = (function() {
+		var _vwo_code = (function () {
 			var account_id = 328510,
 				settings_tolerance = 2000,
 				library_tolerance = 2500,
@@ -48,33 +48,33 @@
 				f = false,
 				d = document;
 			return {
-				use_existing_jquery: function() {
+				use_existing_jquery: function () {
 					return use_existing_jquery;
 				},
-				library_tolerance: function() {
+				library_tolerance: function () {
 					return library_tolerance;
 				},
-				finish: function() {
+				finish: function () {
 					if (!f) {
 						f = true;
 						var a = d.getElementById('_vis_opt_path_hides');
 						if (a) a.parentNode.removeChild(a);
 					}
 				},
-				finished: function() {
+				finished: function () {
 					return f;
 				},
-				load: function(a) {
+				load: function (a) {
 					var b = d.createElement('script');
 					b.src = a;
 					b.type = 'text/javascript';
 					b.innerText;
-					b.onerror = function() {
+					b.onerror = function () {
 						_vwo_code.finish();
 					};
 					d.getElementsByTagName('head')[0].appendChild(b);
 				},
-				init: function() {
+				init: function () {
 					settings_timer = setTimeout('_vwo_code.finish()', settings_tolerance);
 					var a = d.createElement('style'),
 						b = 'body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}',
@@ -90,13 +90,25 @@
 			};
 		}());
 		_vwo_settings_timer = _vwo_code.init();
-
 	</script>
 	<!-- End Visual Website Optimizer Asynchronous Code -->
 	<div id='notifyvisitorstag'></div>
 	<script>
-		(function(n, o, t, i, f, y) {
-			n[i] = function() {
+		function loadJs(a) {
+			var b = d.createElement('script');
+			b.src = a;
+			b.type = 'text/javascript';
+			b.innerText;
+			b.onerror = function () {
+				// _vwo_code.finish();
+			};
+			d.getElementsByTagName('head')[0].appendChild(b);
+
+		}
+	</script>
+	<script>
+		(function (n, o, t, i, f, y) {
+			n[i] = function () {
 				(n[i].q = n[i].q || []).push(arguments)
 			};
 			n[i].l = new Date;
@@ -108,10 +120,13 @@
 			};
 			n[t].async = false;
 			(y = o.createElement('script')).type = 'text/javascript';
+			var localTime = new Date();
+			var gmtOffset = localTime.getTimezoneOffset() * 60 * (-1);
+			var queryString = "bid_e=" + n[t].auth.bid_e + "&bid=" + n[t].auth.bid + "&t=" + n[t].auth.t + "&trafficSource=" + document.referrer + "&pageUrl=" + document.location + "&gmOffset=" + gmtOffset + "&screenWidth=" + screen.width + "&screenHeight=" + screen.height + "&js_callback=nv_json1";
+			loadJs("https://dev1.notifyvisitors.com/brand/TestController/settings?" + queryString);
 			//			y.src = "//dev1.notifyvisitors.com/js/unminified/notify-visitors-1.0.js";
 			//			(f = o.getElementsByTagName('script')[0]).parentNode.insertBefore(y, f);
 		})(window, document, 'notify_visitors', 'nv');
-
 	</script>
 	<script src="common.js"></script>
 	<script src="notify-visitors-banner-test.js"></script>
@@ -120,8 +135,6 @@
 	<script>
 		function notify_mainAction() {
 			notify_visitors.manual.loadjQuery();
-
-			//find xpath script
 			var notifyvisitor_location_url = location.href;
 			notifyvisitor_str = "" + notifyvisitor_location_url;
 			pos = notifyvisitor_str.indexOf("find_xpath=1");
@@ -134,10 +147,8 @@
 			}
 		}
 
-
 		if (notify_visitors.auth != undefined) {
 			notify_visitors.cookie.incognito();
-
 			if (notify_visitors.async != undefined && notify_visitors.async !== false) {
 				if (document.readyState == 'complete') {
 					notify_mainAction();
@@ -149,10 +160,7 @@
 			} else {
 				notify_mainAction();
 			}
-
-		
 		}
-
 	</script>
 
 </body>
