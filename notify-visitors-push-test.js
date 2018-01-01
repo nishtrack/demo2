@@ -259,6 +259,8 @@ notify_visitors.manual = (function (window, undefined) {
         }
         return;
     };
+
+     return manual;
     });
 
 
