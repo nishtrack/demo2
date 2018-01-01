@@ -1578,7 +1578,7 @@ if (notify_visitors.auth != undefined) {
 
 
 function notify_mainAction() {
-    notify_visitors.manual = notify_visitors.manual(document);
+    notify_visitors.manual = notify_visitors.manual(window);
     notify_visitors.manual.loadjQuery();
 
     //find xpath script
