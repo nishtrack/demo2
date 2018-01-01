@@ -128,17 +128,17 @@ notify_visitors.manual = (function (window, undefined) {
         }
 
         var notifications = output.notifications;
-        if (notifications.length > 0) {
-            notify_visitors.manual.webSettingsResponse(output);
-        }
+        // if (notifications.length > 0) {
+        //     notify_visitors.manual.webSettingsResponse(output);
+        // }
 
         if (output.push_details || output.add_to_home_details) {
             notify_visitors.manual.pushLaunchResponse(output);
         }
 
-        if (output.containerInfo) {
-            notify_visitors.manual.containerResponse(output);
-        }
+        // if (output.containerInfo) {
+        //     notify_visitors.manual.containerResponse(output);
+        // }
 
         if (output.event_integration) {
             var event_val = output.event_integration;
