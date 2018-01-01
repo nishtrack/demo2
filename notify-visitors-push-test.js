@@ -19,6 +19,10 @@ notify_visitors.manual.event = function (name, attributes, ltv, scope) {
 };
 
 
+    notify_visitors.manual.eventResponse = function (output) {
+        //console.log(output);
+    };
+
 notify_visitors.manual.actions = function (action) {
     if (action[0] == 'user') {
         notify_visitors.manual.user(action[1], action[2]);
