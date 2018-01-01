@@ -88,7 +88,7 @@ notify_visitors.manual.userResponse = function (output) {
 };
 
 
-manual.pushevent = function (name, attributes, ltv, scope) {
+notify_visitors.manual.pushevent = function (name, attributes, ltv, scope) {
     var nv_push_subscribe = notify_visitors.cookie.get("nv_push_subscribe");
     if (nv_push_subscribe) {
         notify_visitors.manual.event(name, attributes, ltv, scope);
@@ -231,7 +231,7 @@ notify_visitors.manual.schedulePush = function (options) {
 
 
 
-manual.schedulePushResponse = function (output) {
+notify_visitors.manual.schedulePushResponse = function (output) {
     //console.log(output);
 };
 
