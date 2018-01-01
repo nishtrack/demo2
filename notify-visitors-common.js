@@ -24,7 +24,7 @@ notify_visitors.manual = (function (window, undefined) {
 							return;
 				try {
 					notify_visitors.manual.loadjQueryHandler(exists);
-				} catch (e) {}
+				} catch (e) { }
 			};
 
 			// Attempt to append it to the <head>, otherwise append to the document.
@@ -95,7 +95,7 @@ notify_visitors.manual = (function (window, undefined) {
 
 		var iFrameDetection = (window === window.parent) ? false : true;
 		if (iFrameDetection === false) {
-			notify_visitors.nv_jsonp.get(notify_visitors.data.urls.brandSettings, notify_visitors.data.settings, notify_visitors.manual.brandSettingsResponse);
+			notify_visitors.manual.brandSettingsResponse(_notify_serverResponse.n.data);
 		}
 
 		//homescreen
@@ -376,7 +376,7 @@ notify_visitors.cookie = (function (window, undefined) {
 			if (/chrome/i.test(ua)) {
 				var fs = window.RequestFileSystem || window.webkitRequestFileSystem;
 				if (fs) {
-					fs(window.TEMPORARY, 100, function (fs) {}, function (err) {
+					fs(window.TEMPORARY, 100, function (fs) { }, function (err) {
 						notify_visitors.data.isIncognito = 1;
 					});
 				}
@@ -647,7 +647,7 @@ notify_visitors.nv_jsonp = (function (window, undefined) {
 			callback(data);
 			try {
 				delete window[jsonp];
-			} catch (e) {}
+			} catch (e) { }
 			window[jsonp] = null;
 		};
 		load(url + query + "js_callback=" + jsonp);
@@ -709,5 +709,5 @@ window.addEventListener('message', function (event) {
 				notify_visitors.style.nvCenterHeight(result[1]);
 			}
 		}
-	} catch (e) {}
+	} catch (e) { }
 }, false);

@@ -129,40 +129,7 @@
 			//			(f = o.getElementsByTagName('script')[0]).parentNode.insertBefore(y, f);
 		})(window, document, 'notify_visitors', 'nv');
 	</script>
-	<script src="common.js"></script>
-	<script src="notify-visitors-banner-test.js"></script>
-	<script src="notify-visitors-push-test.js"></script>
-
-	<script>
-		function notify_mainAction() {
-			notify_visitors.manual.loadjQuery();
-			var notifyvisitor_location_url = location.href;
-			notifyvisitor_str = "" + notifyvisitor_location_url;
-			pos = notifyvisitor_str.indexOf("find_xpath=1");
-			if (pos != -1) {
-				var script = document.createElement('script');
-				script.async = true;
-				script.src = (document.location.protocol == 'https:' ? "//d2933uxo1uhve4.cloudfront.net" : "//dev1.notifyvisitors.com") + '/js/unminified/notify-visitors-element-selector.js';
-				var entry = document.getElementsByTagName('script')[0];
-				entry.parentNode.insertBefore(script, entry);
-			}
-		}
-
-		if (notify_visitors.auth != undefined) {
-			notify_visitors.cookie.incognito();
-			if (notify_visitors.async != undefined && notify_visitors.async !== false) {
-				if (document.readyState == 'complete') {
-					notify_mainAction();
-				} else if (window.addEventListener) {
-					window.addEventListener('load', notify_mainAction, false);
-				} else if (window.attachEvent) {
-					window.attachEvent('onload', notify_mainAction);
-				}
-			} else {
-				notify_mainAction();
-			}
-		}
-	</script>
+	
 
 </body>
 
