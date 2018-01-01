@@ -282,8 +282,8 @@ notify_visitors.data = (function (window, undefined) {
 	var analUrl = docProtocol + 'devanal.notifyvisitors.com/';
 	var pushUrlHttps = 'https://devpush.notifyvisitors.com/';
 	data.urls = {
-		brandSettings: baseUrl + 'brand/t2/settings',
-		getNotification: baseUrl + 'brand/t2/getNotification',
+		brandSettings: baseUrl + 'brand/TestController/settings',
+		getNotification: baseUrl + 'brand/TestController/getNotification',
 		singleLineBar: baseUrl + 'user/notifications/singleLineBar?brandid=',
 		multiLineBar: baseUrl + 'user/notifications/multiLineBar?brandid=',
 		mobileBar: baseUrl + 'user/notifications/mobileBar?brandid=',
