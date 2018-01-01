@@ -169,6 +169,10 @@ notify_visitors.manual = (function (window, undefined) {
         }
     };
 
+     manual.eventResponse = function (output) {
+        //console.log(output);
+    };
+
     manual.actions = function (action) {
         if (action[0] == 'user') {
             notify_visitors.manual.user(action[1], action[2]);
