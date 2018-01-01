@@ -117,6 +117,36 @@ notify_visitors.manual = (function (window, undefined) {
     };
 
     
+      manual.brandSettingsResponse = function (output) {
+        console.log(output);
+        if (output.Authentication == 'fail') {
+            return false;
+        }
+
+        if (output.cookie_domain != '') {
+            notify_visitors.data.cookie_domain = output.cookie_domain;
+        }
+
+        var notifications = output.notifications;
+        if (notifications.length > 0) {
+            notify_visitors.manual.webSettingsResponse(output);
+        }
+
+        if (output.push_details || output.add_to_home_details) {
+            notify_visitors.manual.pushLaunchResponse(output);
+        }
+
+        if (output.containerInfo) {
+            notify_visitors.manual.containerResponse(output);
+        }
+
+        if (output.event_integration) {
+            var event_val = output.event_integration;
+            notify_visitors.manual.event(event_val.event, event_val.attributes, event_val.ltv, event_val.scope);
+        }
+    };
+
+    
 
 
      manual.event = function (name, attributes, ltv, scope) {
