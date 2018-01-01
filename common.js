@@ -661,53 +661,6 @@ notify_visitors.nv_jsonp = (function (window, undefined) {
 
 
 
-if (notify_visitors.auth != undefined) {
-	notify_visitors.cookie.incognito();
-
-	if (notify_visitors.async != undefined && notify_visitors.async !== false) {
-		if (document.readyState == 'complete') {
-			notify_mainAction();
-		} else if (window.addEventListener) {
-			window.addEventListener('load', notify_mainAction, false);
-		} else if (window.attachEvent) {
-			window.attachEvent('onload', notify_mainAction);
-		}
-	} else {
-		notify_mainAction();
-	}
-
-	/////code for heatmap/////////
-	if (notify_visitors.auth.bid == '2137' || notify_visitors.auth.bid == '2429') {
-		(function (n, o, t, i, f, y) {
-			//                var a = o.createElement('style'),
-			//                b = 'body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}',
-			//                h = o.getElementsByTagName('head')[0];
-			//                a.setAttribute('id', '_nv_hm_hidden_element');
-			//                a.setAttribute('type', 'text/css');
-			//                if (a.styleSheet) a.styleSheet.cssText = b;
-			//                else a.appendChild(o.createTextNode(b));
-			//                h.appendChild(a);
-			n[i] = function () {
-				(n[i].q = n[i].q || []).push(arguments)
-			};
-			n[i].l = new Date;
-			n[t] = {};
-			n[t].auth = {
-				bid_e: notify_visitors.data.auth.bid_e,
-				bid: notify_visitors.data.auth.bid,
-				t: '420'
-			};
-			n[t].async = false;
-			n[t].tokens = notify_visitors.tokens;
-			n[t].ruleData = notify_visitors.ruleData;
-			(y = o.createElement('script')).type = 'text/javascript';
-			y.src = "https://cdnhm.notifyvisitors.com/js/notify-visitors-heatmap-1.0.js";
-			(f = o.getElementsByTagName('script')[0]).parentNode.insertBefore(y, f);
-		})(window, document, '_nv_hm', 'nvheat');
-	}
-}
-
-
 
 
 
