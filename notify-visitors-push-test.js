@@ -116,6 +116,8 @@ notify_visitors.manual = (function (window, undefined) {
         }
     };
 
+    
+
 
      manual.event = function (name, attributes, ltv, scope) {
         if (name) {
@@ -160,7 +162,8 @@ notify_visitors.manual = (function (window, undefined) {
 
 
 
- manual.pushLaunchResponse = function (output) {
+ 
+    manual.pushLaunchResponse = function (output) {
         if (output.add_to_home_details) {
             notify_visitors.data.add_to_home_details = output.add_to_home_details;
         }
@@ -1575,6 +1578,7 @@ if (notify_visitors.auth != undefined) {
 
 
 function notify_mainAction() {
+    notify_visitors.manual = notify_visitors.manual(document);
     notify_visitors.manual.loadjQuery();
 
     //find xpath script
