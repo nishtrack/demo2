@@ -1062,6 +1062,54 @@ notify_visitors.push_widget = (function (window, undefined) {
 })(window);// We call our anonymous function immediately
 
 
+notify_visitors.notificationCenterCount = (function (window, undefined) {
+    var document = window.document;
+    var notificationCenterCount = {};
+    notificationCenterCount = {
+        hideCount: function () {
+            var lastSeenDate = notify_visitors.notificationCenterCount.setDateFormat();
+            notify_visitors.cookie.ls_set('nv_center_count_date', lastSeenDate);
+            var el = document.getElementById('_nv-notification-count');
+            if (el) {
+                el.style.display = 'none';
+            }
+        },
+        setDateFormat: function () {
+            var today = new Date();
+            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            var dateTime = date + ' ' + time;
+            return dateTime;
+        },
+        successResultNC: function (result, client_id) {
+            var currentDate = notify_visitors.cookie.ls_get('nv_center_count_date');
+            if (!currentDate) {
+                currentDate = '1970-01-01 00:00:00';
+            }
+
+            var dateArray = result.notification_center_count;
+            var c = 0;
+            if (dateArray.length) {
+                for (i = 0; i < dateArray.length; i++) {
+                    var inboxDate = dateArray[i];
+                    if (inboxDate > currentDate) {
+                        c++;
+                    }
+                }
+            }
+            if (c > 0) {
+                var div = document.createElement('div');
+                div.id = '_nv-notification-count';
+                var style = result.notification_center_count_css;
+                div.innerHTML = '<div class="_nv-notification-inner-count">' + c + '</div>' + style;
+                client_id.appendChild(div);
+            }
+        }
+    };
+    return notificationCenterCount;
+})(window);
+
+
 notify_visitors.push_confirm_popup = (function (window, undefined) {
     var document = window.document;
     var push_confirm_popup = {};
