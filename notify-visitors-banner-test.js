@@ -228,6 +228,30 @@ notify_visitors.manual.webSettingsResponse = function (output) {
 };
 
 
+   notify_visitors.manual.containerResponse = function (output) {
+        var value = output.containerInfo;
+        for (var i = 0; i < value.length; i++) {
+            if (value[i].div) {
+                var div = document.getElementById(value[i].div);
+                if (div) {
+                    // var link = notify_visitors.data.urls.container + value[i].brandID + '&containerid=' + value[i].containerID + "&gmtOffset=" + notify_visitors.data.settings.gmOffset + "&trafficSource=" + notify_visitors.data.settings.trafficSource + "&referrer=" + notify_visitors.data.settings.pageUrl + "&tokens="+encodeURIComponent(notify_visitors.data.tokens);
+                    var link = notify_visitors.data.urls.container + value[i].brandID + '&containerid=' + value[i].containerID + "&gmtOffset=" + notify_visitors.data.settings.gmOffset + "&referrer=" + notify_visitors.data.settings.pageUrl + "&tokens=" + encodeURIComponent(notify_visitors.data.tokens);
+                    var iframe = document.createElement('iframe');
+                    iframe.frameBorder = 0;
+                    iframe.style.backgroundColor = 'transparent';
+                    iframe.width = value[i].width;
+                    iframe.height = value[i].height;
+                    iframe.id = "nv_container_iframe-" + value[i].containerID;
+                    iframe.setAttribute("src", link);
+                    div.innerHTML = '';
+                    div.appendChild(iframe);
+                }
+            }
+        }
+    };
+
+
+
 //widget
 notify_visitors.widget = (function (window, undefined) {
     var document = window.document;
