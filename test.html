@@ -124,7 +124,7 @@
 			(y = o.createElement('script')).type = 'text/javascript';
 			var localTime = new Date();
 			var gmtOffset = localTime.getTimezoneOffset() * 60 * (-1);
-			var queryString = "bid_e=" + n[t].auth.bid_e + "&bid=" + n[t].auth.bid + "&t=" + n[t].auth.t + "&trafficSource=" + encodeURIComponent(document.referrer) + "&pageUrl=" + encodeURIComponent(document.location) + "&gmOffset=" + gmtOffset + "&screenWidth=" + screen.width + "&screenHeight=" + screen.height + "&js_callback=nv_json1";
+			var queryString = "bid_e=" + n[t].auth.bid_e + "&bid=" + n[t].auth.bid + "&t=" + n[t].auth.t + "&trafficSource=" + encodeURIComponent(document.referrer) + "&pageUrl=" + encodeURIComponent(document.location) + "&gmOffset=" + gmtOffset + "&screenWidth=" + screen.width + "&screenHeight=" + screen.height + "&cookieData = "+document.cookie+"&js_callback=nv_json1";
 			loadJs("https://dev1.notifyvisitors.com/brand/TestController/settings?" + queryString);
 			//			y.src = "//dev1.notifyvisitors.com/js/unminified/notify-visitors-1.0.js";
 			//			(f = o.getElementsByTagName('script')[0]).parentNode.insertBefore(y, f);
