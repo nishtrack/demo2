@@ -1,9 +1,7 @@
 
 var _notify_serverResponse = {
     "n": {
-        "data":<?php  print json_encode($data["notify"]) ?>
-   },"h":{
-    "data":<?php  print $data["heat"] ?>
+        "data":<?php  print json_encode($data) ?>
    }
    }
 
@@ -290,10 +288,6 @@ notify_visitors.data = (function (window, undefined) {
     var pushUrl = docProtocol + 'devpush.notifyvisitors.com/';
     var analUrl = docProtocol + 'devanal.notifyvisitors.com/';
     var pushUrlHttps = 'https://devpush.notifyvisitors.com/';
-    var hmUrl = 'devheat.notifyvisitors.com/';
-    var hmBaseUrl = docProtocol + hmUrl;
-    var abUrl = 'devab.notifyvisitors.com/';
-    var abBaseUrl = docProtocol + abUrl;
     data.urls = {
         brandSettings: baseUrl + 'brand/TestController/settings',
         getNotification: baseUrl + 'brand/TestController/getNotification',
@@ -319,13 +313,7 @@ notify_visitors.data = (function (window, undefined) {
         push_unsub: pushUrlHttps + 'brand/t1/unsubscribe',
         push_unsub_moz: pushUrlHttps + 'brand/t1/unsubscribe_mozilla',
         push_center: pushUrlHttps + 'brand/t1/notifications',
-        geofencing: pushUrlHttps + 'brand/t1/geofencing',
-        heatmapSettings: hmBaseUrl + 'brand/t1/hs',
-        heatmapData: hmBaseUrl + 'brand/t2/heatmapData'
-    };
-    data.js_urls = {
-        hm: hmBaseUrl + 'js/heatmap/hm_paint.js',
-        ab: abBaseUrl + 'js/abTest/bootEditor.js'
+        geofencing: pushUrlHttps + 'brand/t1/geofencing'
     };
 
     return data;
@@ -347,7 +335,7 @@ notify_visitors.cookie = (function (window, undefined) {
             }
             return "";
         },
-        set: function (cname, cvalue, expire, path) {
+        set: function (cname, cvalue, expire) {
             var expires = '';
             if (expire || expire === 0) {
                 expires = "expires=" + expire;
@@ -358,16 +346,11 @@ notify_visitors.cookie = (function (window, undefined) {
             }
 
             var domain = '';
-            var c_path = (path) ? path : '/';
             if (notify_visitors.data.cookie_domain) {
                 domain = 'domain=.' + notify_visitors.data.cookie_domain;
             }
-            if (!c_path) {
-                document.cookie = cname + "=" + cvalue + "; " + expires + "; " + domain + " path=" + c_path;
-            }
-            else {
-                document.cookie = cname + "=" + cvalue + "; " + expires + "; " + " path=" + c_path;
-            }
+
+            document.cookie = cname + "=" + cvalue + "; " + expires + "; " + domain + "; path=/";
         },
         ls_get: function (cname) {
             return localStorage.getItem(cname);
@@ -748,35 +731,38 @@ function getBrowserPushStatus() {
             break;
 
     }
-    return rtValue;
+    return true;
 }
 
-<?php if(count($data["notify"]["notifications"]) > 0) { ?>
 
-    loadJs("//dev1.notifyvisitors.com/js/unminified/notify-visitors-heatmap.js");
+
+
+
+<?php   if($data["push_details"]["chrome"] == "0" && $data["push_details"]["mozilla"] == "0" && $data["push_details"]["safari"] == "0") { ?>
+    loadJs("//dev1.notifyvisitors.com/js/unminified/notify-visitors-banner.js");
 <?php } ?>
+<?php if(count($data["notifications"]) > 0) { ?>
 
-<?php   if($data["notify"]["push_details"]["chrome"] != "0" && $data["notify"]["push_details"]["mozilla"] != "0" && $data["notify"]["push_details"]["safari"] != "0") { ?>
- if(getBrowserPushStatus()) {
+if(getBrowserPushStatus()) {
         loadJs("//dev1.notifyvisitors.com/js/unminified/notify-visitors-push.js");
     }
 <?php } ?>
 
-    loadJs("//dev1.notifyvisitors.com/js/unminified/notify-visitors-banner.js");
 
-function notify_mainAction() {
-    notify_visitors.manual.loadjQuery();
-    var notifyvisitor_location_url = location.href;
-    notifyvisitor_str = "" + notifyvisitor_location_url;
-    pos = notifyvisitor_str.indexOf("find_xpath=1");
-    if (pos != -1) {
-        var script = document.createElement('script');
-        script.async = true;
-        script.src = (document.location.protocol == 'https:' ? "//d2933uxo1uhve4.cloudfront.net" : "//dev1.notifyvisitors.com") + '/js/unminified/notify-visitors-element-selector.js';
-        var entry = document.getElementsByTagName('script')[0];
-        entry.parentNode.insertBefore(script, entry);
+
+    function notify_mainAction() {
+        notify_visitors.manual.loadjQuery();
+        var notifyvisitor_location_url = location.href;
+        notifyvisitor_str = "" + notifyvisitor_location_url;
+        pos = notifyvisitor_str.indexOf("find_xpath=1");
+        if (pos != -1) {
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = (document.location.protocol == 'https:' ? "//d2933uxo1uhve4.cloudfront.net" : "//dev1.notifyvisitors.com") + '/js/unminified/notify-visitors-element-selector.js';
+            var entry = document.getElementsByTagName('script')[0];
+            entry.parentNode.insertBefore(script, entry);
+        }
     }
-}
 
 window.addEventListener("load", function (event) {
     if (notify_visitors.auth != undefined) {
@@ -784,28 +770,13 @@ window.addEventListener("load", function (event) {
         if (notify_visitors.async != undefined && notify_visitors.async !== false) {
             if (document.readyState == 'complete') {
                 notify_mainAction();
-                notify_heatmap_launch();
             } else if (window.addEventListener) {
-                window.addEventListener('load', function () {
-                    notify_mainAction();
-                    notify_heatmap_launch();
-
-                }, false);
+                window.addEventListener('load', notify_mainAction, false);
             } else if (window.attachEvent) {
-                window.attachEvent('onload', function () {
-                    notify_mainAction();
-                    notify_heatmap_launch();
-
-                });
+                window.attachEvent('onload', notify_mainAction);
             }
         } else {
             notify_mainAction();
-            notify_heatmap_launch();
         }
     }
 });
-
-
-function notify_heatmap_launch() {
-    _nv_hm.manual.launch();
-}

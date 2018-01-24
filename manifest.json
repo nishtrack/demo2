@@ -1,0 +1,17 @@
+{
+  "name": "NotifyVisitors", 
+  "short_name": "NV",
+  "icons": [ { 
+            "src": "https://s3.amazonaws.com/tagnpin/static/site/notifyvisitors.png", 
+            "sizes": "192x192",
+            "type": "image/png" 
+            } ], 
+  "start_url": "/?webapp=1&utm_source=NotifyVisitors&utm_medium=pwa",
+  "orientation": "portrait", 
+  "display": "standalone", 
+  "theme_color": "#333",
+  "background_color": "#333", 
+  "gcm_sender_id": "229435420617",
+  "gcm_user_visible_only": true 
+}
+
